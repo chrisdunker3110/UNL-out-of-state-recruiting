@@ -1,0 +1,2 @@
+# UNL-out-of-state-recruiting
+The University of Nebraska-Lincoln, like other public universities, has increased its efforts to recruit students from outside Nebraska in recent years as it seeks to boost its enrollment. In a March 2019 paper published by the Joyce Foundation, Crystal Han and Ozan Jaquette of UCLA and Karina Salazar of the University of Arizona described a process by which they scraped data about college visits from the web, including those by UNL recruiters. Jaquette provided the data to me, which I used as the basis for a story in the Journal Star. 
