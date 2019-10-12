@@ -3,7 +3,6 @@
 
 ### LOAD IN PACKAGES
 require(tidyverse)
-require(readr)
 require(tigris)
 require(leaflet)
 require(sf)
@@ -13,14 +12,15 @@ require(RColorBrewer)
 require(htmlwidgets)
 
 ### READ CSV OF WEBSCRAPED COLLEGE RECRUITING VISITS
-recruiting_visits = read.csv(("recruiting_visits.csv"), stringsAsFactors = FALSE) %>%
+recruiting_visits = read.csv(("https://raw.githubusercontent.com/chrisdunker3110/UNL-out-of-state-recruiting/master/recruiting_visits.csv"), 
+                             stringsAsFactors = FALSE) %>%
   filter(univ_state == "NE") %>%
   select(8:9, 12:13, 16:22) %>%
   arrange(event_date) %>%
   rename("zip_code" = "determined_zip")
 
 ### READ IN MASTER ZIP CODE FILE
-master_zip <- read.csv("meta_zipcode.csv")
+master_zip <- read.csv("https://raw.githubusercontent.com/chrisdunker3110/UNL-out-of-state-recruiting/master/meta_zipcode.csv")
 
 ### JOIN RECRUITING VISIT DATA WITH ZIP CODE DATA FROM U.S. CENSUS BY ZIP CODE
 nebrecruiting = left_join(recruiting_visits, master_zip, by = "zip_code") %>%
@@ -30,7 +30,8 @@ nebrecruiting = left_join(recruiting_visits, master_zip, by = "zip_code") %>%
 nebrecruiting$avgmedian_inc_2564 = currency(nebrecruiting$avgmedian_inc_2564, digits = 0L)
 
 ### READ IN MASTER HIGH SCHOOL FILEs
-public_schools = read.csv(("meta_high_school_public.csv"), stringsAsFactors = FALSE) %>%
+public_schools = read.csv(("https://raw.githubusercontent.com/chrisdunker3110/UNL-out-of-state-recruiting/master/meta_high_school_public.csv"), 
+                          stringsAsFactors = FALSE) %>%
   select(6, 8, 17:31) %>%
   rename("students" = "total_students", "freshmen" = "total_09", "sophomores" = "total_10", "juniors" = "total_11",
          "seniors" = "total_12", "whites" = "total_white", "blacks" = "total_black", "hispanic" = "total_hispanic",
@@ -41,7 +42,8 @@ public_schools = read.csv(("meta_high_school_public.csv"), stringsAsFactors = FA
 nebrecruiting = left_join(nebrecruiting, public_schools, by = "zip_code")
 
 ### NOW DO THE SAME WITH THE PRIVATE SCHOOLS
-private_schools = read.csv(("meta_high_school_private.csv"), stringsAsFactors = FALSE) %>%
+private_schools = read.csv(("https://raw.githubusercontent.com/chrisdunker3110/UNL-out-of-state-recruiting/master/meta_high_school_private.csv"), 
+                           stringsAsFactors = FALSE) %>%
   rename("students" = "total_students", "freshmen" = "total_09", "sophomores" = "total_10", "juniors" = "total_11",
          "seniors" = "total_12", "whites" = "total_white", "blacks" = "total_black", "hispanic" = "total_hispanic",
          "asians" = "total_asian", "natives" = "total_amerindian", "hawaiian" = "total_nativehawaii", "tworaces" = "total_tworaces",
